@@ -8,15 +8,12 @@ module.exports = (app) => {
 
   let notesData = [];
 
-  // ---------------------------------------------------------------------------
-
-  app.get('/api/notes', (req, res) => res.json(db));
-
+  
   // ---------------------------------------------------------------------------
   
   app.get("/api/notes", function(err, res) {
     try {
-      notesData = fs.readFileSync("./db/db.json", "utf8");
+      notesData = fs.readFileSync(`${__dirname}/../db/db.json`, "utf8");
       notesData = JSON.parse(notesData);
     } catch (err) {
       console.log("\n error:");
@@ -29,13 +26,13 @@ module.exports = (app) => {
 
   app.post("/api/notes", function(req, res) {
     try {
-      notesData = fs.readFileSync("./db/db.json", "utf8");
+      notesData = fs.readFileSync(`${__dirname}/../db/db.json`, "utf8");
       notesData = JSON.parse(notesData);
       req.body.id = notesData.length;
       notesData.push(req.body); 
       notesData = JSON.stringify(notesData);
     
-      fs.writeFile("./db/db.json", notesData, "utf8", function(err) {
+      fs.writeFile(`${__dirname}/../db/db.json`, notesData, "utf8", function(err) {
         if (err) 
           throw err;
       });
@@ -51,13 +48,13 @@ module.exports = (app) => {
 
 app.delete("/api/notes/:id", function(req, res) {
   try {
-    notesData = fs.readFileSync("./db/db.json", "utf8");
+    notesData = fs.readFileSync(`${__dirname}/../db/db.json`, "utf8");
     notesData = JSON.parse(notesData);
     notesData = notesData.filter(function(note) {
       return note.id != req.params.id;
     });
     notesData = JSON.stringify(notesData);
-    fs.writeFile("./db/db.json", notesData, "utf8", function(err) {
+    fs.writeFile(`${__dirname}/../db/db.json`, notesData, "utf8", function(err) {
       if (err) throw err;
     });
     
