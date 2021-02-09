@@ -38,7 +38,7 @@ As soonn as the user click of any note in the lefr side the user will able read 
 ### delete any note
 when the user click the red bin where is next from any note , that note will be deleted.
 
-<img src="./public/assets/image/readme/delete-taker.png" alt="delete note">
+<img src="./public/assets/image/readme/delete-note.png" alt="delete note">
 
 
 
